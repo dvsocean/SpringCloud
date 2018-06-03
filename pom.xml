@@ -18,6 +18,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 
+	<!--TEST BOM-->
+
+	<!--TEST BOM-->
+
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -26,6 +30,7 @@
 	</properties>
 
 	<dependencies>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
@@ -70,6 +75,21 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+
+
+				<plugin>
+					<groupId>org.springframework.cloud</groupId>
+					<artifactId>spring-cloud-contract-maven-plugin</artifactId>
+					<version>2.0.0.RC2</version>
+					<!-- Don't forget about this value !! -->
+					<extensions>true</extensions>
+					<configuration>
+						<!-- Provide the base class for your auto-generated tests -->
+						<baseClassForTests>com.cloudcontract.recap.MvcTest</baseClassForTests>
+
+					</configuration>
+				</plugin>
+
 		</plugins>
 	</build>
 
@@ -83,6 +103,5 @@
 			</snapshots>
 		</repository>
 	</repositories>
-
 
 </project>

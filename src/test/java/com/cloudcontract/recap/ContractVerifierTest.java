@@ -12,25 +12,25 @@ import org.junit.Test;
 
 public class ContractVerifierTest extends MvcTest {
 
-
   @Test
   public void validate_shouldMarkClientAsFraud() throws Exception {
     // given:
     MockMvcRequestSpecification request = given()
-        .header("Content-Type", "application/vnd.fraud.v1+json")
-        .body("{\"clientId\":\"1234567890\",\"loanAmount\":99999}");
+        .header("Content-Type", "application/json")
+        .body("{\"description\":\"I am a simple description\",\"completed\":true}");
 
     // when:
     ResponseOptions response = given().spec(request)
-        .put("/fraudcheck");
+        .get("https://ocean-rest-test.herokuapp.com/items");
 
     // then:
     assertThat(String.valueOf(response.statusCode())).isEqualTo(200);
-    assertThat(response.header("Content-Type")).isEqualTo("application/vnd.fraud.v1+json");
+    //assertThat(response.statusCode()).isEqualTo(200);
+    assertThat(response.header("Content-Type")).isEqualTo("application/json");
     // and:
     DocumentContext parsedJson = JsonPath.parse(response.getBody().asString());
-    assertThatJson(parsedJson).field("fraudCheckStatus").isEqualTo("FRAUD");
-    assertThatJson(parsedJson).field("rejectionReason").isEqualTo("Amount too high");
+    assertThatJson(parsedJson).field("description").isEqualTo("FRAUD");
+    assertThatJson(parsedJson).field("completed").isEqualTo("Amount too high");
   }
 
 }

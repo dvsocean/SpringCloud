@@ -1,28 +1,31 @@
+package contracts
 
-org.springframework.cloud.contract.spec.Contract.make {
+import org.springframework.cloud.contract.spec.Contract
+
+Contract.make {
     request {
-        method 'PUT'
-        url '/fraudcheck'
+        method 'GET'
+        url 'https://ocean-rest-test.herokuapp.com/items'
         body("""
     {
-      "clientId":"1234567890",
-      "loanAmount":99999
+      "description":"I am a simple description",
+      "completed":true
     }
     """)
         headers {
-            header('Content-Type', 'application/vnd.fraud.v1+json')
+            header('Content-Type', 'application/json')
         }
     }
     response {
         status 200
         body("""
   {
-    "fraudCheckStatus": "FRAUD",
-    "rejectionReason": "Amount too high"
+    "description": "INVALID",
+    "rejectionReason": "Not completed"
   }
   """)
         headers {
-            header('Content-Type': 'application/vnd.fraud.v1+json')
+            header('Content-Type': 'application/json')
         }
     }
 }
