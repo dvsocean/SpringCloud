@@ -80,12 +80,12 @@
 				<plugin>
 					<groupId>org.springframework.cloud</groupId>
 					<artifactId>spring-cloud-contract-maven-plugin</artifactId>
-					<version>2.0.0.RC2</version>
+					<version>1.2.4.RELEASE</version>
 					<!-- Don't forget about this value !! -->
 					<extensions>true</extensions>
 					<configuration>
 						<!-- Provide the base class for your auto-generated tests -->
-						<baseClassForTests>com.cloudcontract.recap.MvcTest</baseClassForTests>
+						<baseClassForTests>hello.BaseClass</baseClassForTests>
 
 					</configuration>
 				</plugin>
